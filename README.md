@@ -1,11 +1,11 @@
 # NewJessica
 <div align="center">
 <p>
-    <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/master/newjessica.png">
+    <img width="200" src="https://raw.githubusercontent.com/CCBlueX/LiquidCloud/master/LiquidBounce/liquidbounceLogo.svg">
 </p>
 
-
-Telegram 
+[Matrix]() |
+[Telegram](https://t.me/NewJessica) |
 </div>
 
 🧑‍💻 Our JessiXperience team represents developers from around the world, including Spain, Georgia, the Czech Republic, and others.
