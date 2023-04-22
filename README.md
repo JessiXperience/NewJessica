@@ -10,7 +10,7 @@
 
 🧑‍💻 Our JessiXperience team represents developers from around the world, including Spain, Georgia, the Czech Republic, and others.
 
-⛏   We specialize in creating a hacked minecraft client on versions 1.8-1.19.3, using the built-in ViaVersion.
+⛏  NewJessica is a free and open-source mixin-based injection hacked client using the Fabric API for Minecraft. Supports versions from 1.8 to 1.19.4.
 
 🗽   Our main goal is to provide you with a free and open client that allows you to explore modules and make your own changes. We also strive to develop new and interesting modules that will help you in the game.
 
