@@ -1,7 +1,7 @@
 # NewJessica
 <div align="center">
 <p>
-    <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/master/newjessica.png">
+    <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/master/NewJessica_logo.png">
 </p>
 
 [Matrix]() |
