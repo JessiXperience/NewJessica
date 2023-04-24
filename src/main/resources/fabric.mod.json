@@ -4,7 +4,9 @@
   "version": "${version}",
   "name": "NewJessica",
   "description": "",
-  "authors": [],
+  "authors": [
+    "codedlife"
+  ],
   "contact": {
     "repo": "https://github.com/JessiXperience/NewJessica"
   },
@@ -15,7 +17,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "me.codedlife.newjessica.NewJessica"
+        "value": "org.jessixperience.jessica.NewJessica"
       }
     ]
   },

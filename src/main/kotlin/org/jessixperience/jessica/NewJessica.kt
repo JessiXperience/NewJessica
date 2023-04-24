@@ -1,4 +1,4 @@
-package me.codedlife.newjessica
+package org.jessixperience.jessica
 import net.fabricmc.api.ModInitializer
 
 
