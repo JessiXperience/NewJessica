@@ -1,7 +1,11 @@
 # NewJessica
 <div align="center">
 <p>
+<<<<<<< HEAD
     <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/master/NewJessica_logo.png">
+=======
+    <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/alpha/newjessica.png">
+>>>>>>> e52d95c (Update README.md)
 </p>
 
 [Matrix]() |
