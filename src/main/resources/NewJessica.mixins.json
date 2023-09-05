@@ -4,7 +4,10 @@
   "package": "org.jessixperience.jessica.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "TitleScreenMixin"
+    "PressableWidgetMixin",
+    "TitleScreenMixin",
+    "StyleMixin",
+    "ClickableWidgetMixin"
   ],
   "client": [
   ],
