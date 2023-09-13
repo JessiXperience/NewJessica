@@ -10,7 +10,8 @@
     "PlayerEntityMixin",
     "PressableWidgetMixin",
     "StyleMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "WindowMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,54 +1,75 @@
 package org.jessixperience.jessica.utils
 
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.item.*
+import net.minecraft.text.Text
+import net.minecraft.util.Hand
 import org.jessixperience.jessica.utils.interfaces.Util
 
-class AutoOffHand : Util {
-    private var lowHealth: Int = 4
-    private var minHealth: Int = 7
+class AutoOffHand : Util
+{
+    private var lowHealth: Int = 7
+    private var critHealth: Int = 4
 
-    private var swords: Array<Item> = arrayOf(
-        Items.WOODEN_SWORD,
-        Items.STONE_SWORD,
-        Items.GOLDEN_SWORD,
-        Items.IRON_SWORD,
-        Items.DIAMOND_SWORD,
-        Items.NETHERITE_SWORD
-    )
-    private var pickaxes: Array<Item> = arrayOf(
-        Items.WOODEN_PICKAXE,
-        Items.STONE_PICKAXE,
-        Items.GOLDEN_PICKAXE,
-        Items.IRON_PICKAXE,
-        Items.DIAMOND_PICKAXE,
-        Items.NETHERITE_PICKAXE
-    )
+    private fun getFromInventory(searchedItem: Item ): Int {
+        var itemIndex: Int = -1;
+        var player = MinecraftClient.getInstance().player!!
+
+        for ( itemIndex in 0 until player.inventory.size() ) {
+            val currentStack = player.inventory.getStack(itemIndex).item
+            if ( currentStack != searchedItem ) continue
+            return itemIndex
+        }
+
+        return itemIndex
+    }
 
     fun onLowHP() {
         val mc = MinecraftClient.getInstance()
-        val activeItem: ItemStack = mc.player!!.activeItem
 
-        println( activeItem.name.content.toString() )
-        println( activeItem.name.toString() )
-        println( activeItem.name.asOrderedText().toString() )
+        val activeItem: ItemStack = mc.player!!.mainHandStack
+        val secondaryItem: ItemStack = mc.player!!.offHandStack
 
-        if ( swords.contains( activeItem.item ) ) {
-            println( "Sword" );
-            if ( mc.player!!.inventory.contains( ItemStack( Items.GOLDEN_APPLE ) ) ) return
-
+        if ( activeItem.item is SwordItem ) {
+            if (secondaryItem.item == Items.GOLDEN_APPLE ||
+                secondaryItem.item == Items.ENCHANTED_GOLDEN_APPLE ) return
+            onSword( mc.player!! )
         }
 
-        if ( pickaxes.contains( activeItem.item ) ) {
-            println( "Pickaxe" );
-            if ( mc.player!!.inventory.contains( ItemStack( Items.CHORUS_FRUIT ) ) ) return
-
+        if ( secondaryItem.item is PickaxeItem ) {
+            if ( secondaryItem.item == Items.CHORUS_FRUIT ) return
+            onPickaxe( mc.player!! )
         }
-
     }
 
-    fun onMinHP() {
-        println( "Test c" );
+    private fun onSword( player: ClientPlayerEntity ) {
+        var appleIndex = getFromInventory( Items.ENCHANTED_GOLDEN_APPLE )
+        if ( appleIndex == -1 ) appleIndex = getFromInventory( Items.GOLDEN_APPLE )
+        if ( appleIndex == -1 ) return
+        println( "Golden apple found: $appleIndex" )
+
+        val appleStack = player.inventory.removeStack( appleIndex )
+        player.setStackInHand( Hand.OFF_HAND, appleStack )
+    }
+
+    private fun onPickaxe( player: ClientPlayerEntity ) {
+        val chorusIndex = getFromInventory( Items.POPPED_CHORUS_FRUIT )
+        if ( chorusIndex == -1 ) return
+        println( "Chorus found: $chorusIndex" )
+
+        val chorusStack = player.inventory.removeStack( chorusIndex )
+        player.setStackInHand( Hand.OFF_HAND, chorusStack )
+    }
+
+    fun onCriticalHP() {
+        val player = MinecraftClient.getInstance().player!!
+        val totemIndex = getFromInventory( Items.TOTEM_OF_UNDYING )
+        if ( totemIndex == -1 ) return
+        println( "Totem found $totemIndex" )
+
+        val totemStack = player.inventory.removeStack( totemIndex )
+        player.setStackInHand( Hand.OFF_HAND, totemStack )
     }
 
     override fun isActive(): Boolean {
@@ -61,12 +82,12 @@ class AutoOffHand : Util {
 
         if ( playerHealth > lowHealth ) return;
 
-        if ( playerHealth < minHealth ) {
-            this.onMinHP()
+        if ( playerHealth > critHealth ) {
+            this.onLowHP()
             return
         }
 
-        this.onLowHP()
+        this.onCriticalHP()
     }
 
 
