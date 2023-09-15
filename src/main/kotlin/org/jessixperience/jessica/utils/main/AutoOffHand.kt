@@ -1,8 +1,6 @@
 package org.jessixperience.jessica.utils.main
 
-import net.minecraft.client.MinecraftClient
 import net.minecraft.item.*
-import net.minecraft.util.Hand
 import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.JessicaUtil
 
@@ -39,8 +37,8 @@ class AutoOffHand : JessicaUtil()
         secondaryArmEquip( Items.TOTEM_OF_UNDYING )
     }
 
-    override fun Exec(): Boolean {
-        if ( !super.Exec() ) return false
+    override fun exec(): Boolean {
+        if ( !super.exec() ) return false
         if ( NewJessica.DEBUG_MODE ) NewJessica.LOGGER.info( "AutoHand executed" )
 
         if ( player.health > lowHealth ) return false

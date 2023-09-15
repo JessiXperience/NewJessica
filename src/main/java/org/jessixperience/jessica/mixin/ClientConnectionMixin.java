@@ -30,8 +30,8 @@ net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket
  */
 
 @Mixin( ClientConnection.class )
-public class ClientConnectionMixin {
-
+public class ClientConnectionMixin
+{
     @Unique
     private List<String> ignorePackets = Arrays.asList(
             // Client
@@ -56,14 +56,12 @@ public class ClientConnectionMixin {
             "net.minecraft.network.packet.s2c.play.KeepAliveS2CPacket",
             "net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket",
             "net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket",
-            // Interesting packats
+            // Interesting packets
             "net.minecraft.network.packet.s2c.play.EntityAttributesS2CPacket",
             "net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket",
             "net.minecraft.network.packet.s2c.play.LightUpdateS2CPacket",
             "net.minecraft.network.packet.s2c.play.EntityPositionS2CPacket"
     );
-
-
 
     @Inject( method = "channelRead0(Lio/netty/channel/ChannelHandlerContext;Lnet/minecraft/network/packet/Packet;)V", at = @At( "HEAD" ) )
     private void readPackages( ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo ci ) {
@@ -73,8 +71,8 @@ public class ClientConnectionMixin {
         if ( NewJessica.DEBUG_MODE ) NewJessica.INSTANCE.getLogger().info( packetClass );
 
         for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
-            if ( !packetClass.equals( tool.GetTriggerPacket() ) ) continue;
-            tool.Exec();
+            if ( !packetClass.equals( tool.getTriggerPacket() ) ) continue;
+            tool.exec();
         }
      }
 
@@ -85,12 +83,12 @@ public class ClientConnectionMixin {
         boolean initPacket = packetClass.equals("net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket");
         if ( NewJessica.DEBUG_MODE && initPacket ) NewJessica.INSTANCE.getLogger().info( "Got init packet" );
 
-        for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
-            if ( initPacket ) tool.Init();
-        }
-
         if ( ignorePackets.contains( packetClass ) ) return;
         if ( NewJessica.DEBUG_MODE ) NewJessica.INSTANCE.getLogger().info( packetClass );
+
+        for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
+            if ( initPacket ) tool.init();
+        }
     }
 
 }

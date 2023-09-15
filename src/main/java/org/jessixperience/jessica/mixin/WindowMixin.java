@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MinecraftClient.class)
-public class WindowMixin {
+public class WindowMixin
+{
     @Inject( method = "getWindowTitle", at = @At("HEAD"), cancellable = true )
     public void titleRewrite(CallbackInfoReturnable<String> cir ) {
         cir.setReturnValue( NewJessica.MOD_ID + " " + NewJessica.RELEASE );
         cir.cancel();
     }
-
 }

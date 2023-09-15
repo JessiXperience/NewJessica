@@ -1,9 +1,10 @@
 package org.jessixperience.jessica.utils.interfaces
 
-interface Util {
-    fun Init()
-    fun Exec(): Boolean
+interface Util
+{
+    fun init()
+    fun exec(): Boolean
     fun isActive(): Boolean
-    fun SetActive( state: Boolean )
-    fun GetTriggerPacket(): String
+    fun setActive(state: Boolean )
+    fun getTriggerPacket(): String
 }

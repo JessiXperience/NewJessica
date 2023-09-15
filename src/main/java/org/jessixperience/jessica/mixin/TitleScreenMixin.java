@@ -41,7 +41,8 @@ import static net.minecraft.client.gui.DrawableHelper.drawTexture;
 
 @Nullable
 @Mixin(TitleScreen.class)
-public class TitleScreenMixin extends Screen {
+public class TitleScreenMixin extends Screen
+{
     private static final Identifier BACKGROUND = new Identifier("backgrounds/back.jpg");
     protected TitleScreenMixin(Text title) {
         super(title);

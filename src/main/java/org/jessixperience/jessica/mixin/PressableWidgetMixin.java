@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PressableWidget.class)
-public class PressableWidgetMixin extends ClickableWidget {
-
+public class PressableWidgetMixin extends ClickableWidget
+{
     public PressableWidgetMixin(int x, int y, int width, int height, Text message) {
         super(x, y, width, height, message);
     }

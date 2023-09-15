@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Objects;
 
 @Mixin(ClickableWidget.class)
-public class ClickableWidgetMixin extends DrawableHelper {
-
+public class ClickableWidgetMixin extends DrawableHelper
+{
     @Inject( method = "drawScrollableText(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/text/Text;IIIII)V", at = @At("HEAD"), cancellable = true )
     private static void drawScrollableText(MatrixStack matrices, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, int color, CallbackInfo ci) {
 

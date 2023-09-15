@@ -2,13 +2,13 @@ package org.jessixperience.jessica.utils
 
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayerEntity
+import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.item.Item
 import net.minecraft.util.Hand
-import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.interfaces.Util
 
-open class JessicaUtil : Util {
-
+open class JessicaUtil : Util
+{
     protected var TRIGGER = ""
     protected lateinit var mc: MinecraftClient
     protected lateinit var player: ClientPlayerEntity
@@ -20,15 +20,15 @@ open class JessicaUtil : Util {
         return isActive;
     }
 
-    override fun SetActive( state: Boolean ) {
+    override fun setActive( state: Boolean ) {
         isActive = state
     }
 
-    override fun GetTriggerPacket(): String {
+    override fun getTriggerPacket(): String {
         return TRIGGER
     }
 
-    protected fun getFromInventory( searchedItem: Item): Int {
+    private fun getFromInventory(searchedItem: Item): Int {
         for ( itemIndex in 0 until player.inventory.size() ) {
             val currentStack = player.inventory.getStack(itemIndex).item
             if ( currentStack != searchedItem ) continue
@@ -42,7 +42,7 @@ open class JessicaUtil : Util {
         if ( itemIndex == -1 ) return false
 
         val itemStack = player.inventory.removeStack( itemIndex )
-        val armItemStack = player.inventory.removeStack( 40 )
+        val armItemStack = player.inventory.removeStack( PlayerInventory.OFF_HAND_SLOT )
 
         player.inventory.insertStack( itemIndex, armItemStack )
         player.setStackInHand( Hand.OFF_HAND, itemStack )
@@ -50,13 +50,13 @@ open class JessicaUtil : Util {
         return true
     }
 
-    override fun Init() {
+    override fun init() {
         mc = MinecraftClient.getInstance()
         player = mc.player!!
         this.initialized = true
     }
 
-    override fun Exec(): Boolean {
+    override fun exec(): Boolean {
         if ( !initialized ) return false;
         return isActive && mc.player != null
     }

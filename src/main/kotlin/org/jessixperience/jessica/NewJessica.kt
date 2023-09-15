@@ -22,7 +22,6 @@ object NewJessica: ModInitializer
     }
 
     override fun onInitialize() {
-
         println("$MOD_ID $RELEASE initialized. Let's fun")
     }
 }
