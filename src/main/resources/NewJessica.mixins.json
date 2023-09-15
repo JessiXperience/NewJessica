@@ -8,8 +8,6 @@
   ],
   "client": [
     "ClickableWidgetMixin",
-    "ClientPlayerEntityMixin",
-    "PlayerEntityMixin",
     "PressableWidgetMixin",
     "StyleMixin",
     "TitleScreenMixin",

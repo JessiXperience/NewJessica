@@ -6,6 +6,7 @@ import net.minecraft.network.listener.PacketListener;
 import net.minecraft.network.packet.Packet;
 import org.jessixperience.jessica.NewJessica;
 import org.jessixperience.jessica.utils.AutoOffHand;
+import org.jessixperience.jessica.utils.interfaces.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +28,8 @@ net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket
 // Атака
 net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket
 net.minecraft.network.packet.c2s.play.HandSwingC2SPacket
+
+net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket
 
  */
 
@@ -55,7 +58,8 @@ public class ClientConnectionMixin {
             "net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket",
             "net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket",
             "net.minecraft.network.packet.s2c.play.KeepAliveS2CPacket",
-
+            "net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket",
+            "net.minecraft.network.packet.s2c.play.EntityEquipmentUpdateS2CPacket",
             // Interesting packats
             "net.minecraft.network.packet.s2c.play.EntityAttributesS2CPacket",
             "net.minecraft.network.packet.s2c.play.ChunkDataS2CPacket",
@@ -72,10 +76,10 @@ public class ClientConnectionMixin {
         if ( ignorePackets.contains( packetClass ) ) return;
         NewJessica.INSTANCE.getLogger().info( packetClass );
 
-        if ( packetClass != "net.minecraft.network.packet.s2c.play.HealthUpdateS2CPacket" )  return;
-        AutoOffHand handoff = new AutoOffHand();
-        if ( !handoff.isActive() ) return;
-        handoff.exec();
+        for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
+            if ( !packetClass.equals(tool.GetTriggerPacket()) ) continue;
+            tool.Exec();
+        }
      }
 
     @Inject( method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At( "HEAD" ))

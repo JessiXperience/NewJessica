@@ -8,8 +8,10 @@ import org.jessixperience.jessica.utils.interfaces.Util
 
 class AutoOffHand : Util
 {
+    private val TRIGGER: String = "net.minecraft.network.packet.s2c.play.HealthUpdateS2CPacket"
     private var lowHealth: Int = 10
     private var critHealth: Int = 5
+    private var isActive: Boolean = true
 
     private fun getFromInventory( searchedItem: Item ): Int {
         var itemIndex: Int = -1;
@@ -74,10 +76,14 @@ class AutoOffHand : Util
     }
 
     override fun isActive(): Boolean {
-        return true;
+        return isActive;
     }
 
-    override fun exec() {
+    override fun GetTriggerPacket(): String {
+        return TRIGGER
+    }
+
+    override fun Exec() {
         if ( MinecraftClient.getInstance().player == null ) return
         NewJessica.LOGGER.info( "Damage taken" )
         val playerHealth: Float = MinecraftClient.getInstance().player!!.health
