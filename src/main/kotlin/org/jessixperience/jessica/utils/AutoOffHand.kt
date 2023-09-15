@@ -1,20 +1,17 @@
 package org.jessixperience.jessica.utils
 
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.item.*
-import net.minecraft.network.packet.s2c.play.InventoryS2CPacket
-import net.minecraft.text.Text
 import net.minecraft.util.Hand
 import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.interfaces.Util
 
 class AutoOffHand : Util
 {
-    private var lowHealth: Int = 7
-    private var critHealth: Int = 4
+    private var lowHealth: Int = 10
+    private var critHealth: Int = 5
 
-    private fun getFromInventory(searchedItem: Item ): Int {
+    private fun getFromInventory( searchedItem: Item ): Int {
         var itemIndex: Int = -1;
         var player = MinecraftClient.getInstance().player!!
 
@@ -25,6 +22,22 @@ class AutoOffHand : Util
         }
 
         return itemIndex
+    }
+
+    private fun secondaryArmEquip( item: Item ): Boolean {
+        val mc = MinecraftClient.getInstance();
+        val player = mc.player!!
+
+        val itemIndex = getFromInventory( item )
+        if ( itemIndex == -1 ) return false
+
+        val itemStack = player.inventory.removeStack( itemIndex )
+        val armItemStack = player.inventory.removeStack( 40 )
+
+        player.inventory.setStack( itemIndex, armItemStack )
+        player.setStackInHand( Hand.OFF_HAND, itemStack )
+
+        return true
     }
 
     fun onLowHP() {
@@ -38,38 +51,16 @@ class AutoOffHand : Util
         if ( activeItem.item is SwordItem ) {
             if (secondaryItem.item == Items.GOLDEN_APPLE ||
                 secondaryItem.item == Items.ENCHANTED_GOLDEN_APPLE ) return
-            onSword( mc.player!! )
+
+            val success = secondaryArmEquip( Items.ENCHANTED_GOLDEN_APPLE )
+            if ( !success ) secondaryArmEquip( Items.GOLDEN_APPLE )
         }
 
-        if ( secondaryItem.item is PickaxeItem ) {
+        if ( activeItem.item is PickaxeItem ) {
             if ( secondaryItem.item == Items.CHORUS_FRUIT ) return
-            onPickaxe( mc.player!! )
+            secondaryArmEquip( Items.CHORUS_FRUIT )
         }
     }
-
-    private fun onSword( player: ClientPlayerEntity ) {
-        NewJessica.LOGGER.info( "Sword detected" )
-
-        var appleIndex = getFromInventory( Items.ENCHANTED_GOLDEN_APPLE )
-        if ( appleIndex == -1 ) appleIndex = getFromInventory( Items.GOLDEN_APPLE )
-        if ( appleIndex == -1 ) return
-        println( "Golden apple found: $appleIndex" )
-
-        val appleStack = player.inventory.removeStack( appleIndex )
-        player.setStackInHand( Hand.OFF_HAND, appleStack )
-    }
-
-    private fun onPickaxe( player: ClientPlayerEntity ) {
-        NewJessica.LOGGER.info( "Pickaxe detected" )
-
-        val chorusIndex = getFromInventory( Items.POPPED_CHORUS_FRUIT )
-        if ( chorusIndex == -1 ) return
-        println( "Chorus found: $chorusIndex" )
-
-        val chorusStack = player.inventory.removeStack( chorusIndex )
-        player.setStackInHand( Hand.OFF_HAND, chorusStack )
-    }
-
     fun onCriticalHP() {
         NewJessica.LOGGER.info( "Critical HP" )
 
