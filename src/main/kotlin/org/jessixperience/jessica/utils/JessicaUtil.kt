@@ -44,18 +44,16 @@ open class JessicaUtil : Util {
         val itemStack = player.inventory.removeStack( itemIndex )
         val armItemStack = player.inventory.removeStack( 40 )
 
-        player.inventory.setStack( itemIndex, armItemStack )
+        player.inventory.insertStack( itemIndex, armItemStack )
         player.setStackInHand( Hand.OFF_HAND, itemStack )
 
         return true
     }
 
     override fun Init() {
-        NewJessica.LOGGER.info( "Init player" )
         mc = MinecraftClient.getInstance()
         player = mc.player!!
         this.initialized = true
-        NewJessica.LOGGER.info( "Got player" )
     }
 
     override fun Exec(): Boolean {

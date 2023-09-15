@@ -34,17 +34,16 @@ class AutoOffHand : JessicaUtil()
     }
 
     private fun onCriticalHP() {
-        val totemIndex = getFromInventory( Items.TOTEM_OF_UNDYING )
-        if ( totemIndex == -1 ) return
-        val totemStack = player.inventory.removeStack( totemIndex )
-        player.setStackInHand( Hand.OFF_HAND, totemStack )
+        val secondaryItem: ItemStack = player.offHandStack
+        if ( secondaryItem.item == Items.TOTEM_OF_UNDYING ) return
+        secondaryArmEquip( Items.TOTEM_OF_UNDYING )
     }
 
     override fun Exec(): Boolean {
         if ( !super.Exec() ) return false
+        if ( NewJessica.DEBUG_MODE ) NewJessica.LOGGER.info( "AutoHand executed" )
 
         if ( player.health > lowHealth ) return false
-        NewJessica.LOGGER.info( "AutoOffHand executed" )
         if ( player.health > crtHealth ) {
             this.onLowHP()
             return true
