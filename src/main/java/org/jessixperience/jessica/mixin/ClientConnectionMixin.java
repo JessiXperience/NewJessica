@@ -2,10 +2,8 @@ package org.jessixperience.jessica.mixin;
 
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.network.ClientConnection;
-import net.minecraft.network.listener.PacketListener;
 import net.minecraft.network.packet.Packet;
 import org.jessixperience.jessica.NewJessica;
-import org.jessixperience.jessica.utils.AutoOffHand;
 import org.jessixperience.jessica.utils.interfaces.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -13,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

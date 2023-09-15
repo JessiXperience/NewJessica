@@ -1,6 +1,6 @@
 package org.jessixperience.jessica
 import net.fabricmc.api.ModInitializer
-import org.jessixperience.jessica.utils.AutoOffHand
+import org.jessixperience.jessica.utils.main.AutoOffHand
 import org.jessixperience.jessica.utils.interfaces.Util
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

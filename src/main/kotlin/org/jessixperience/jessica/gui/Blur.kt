@@ -1,4 +1,4 @@
-package org.jessixperience.jessica.utils
+package org.jessixperience.jessica.gui
 
 import java.awt.Color
 
