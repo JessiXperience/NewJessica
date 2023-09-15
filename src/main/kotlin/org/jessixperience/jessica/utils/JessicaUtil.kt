@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.util.Hand
+import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.interfaces.Util
 
 open class JessicaUtil : Util {
@@ -13,6 +14,7 @@ open class JessicaUtil : Util {
     protected lateinit var player: ClientPlayerEntity
 
     private var isActive: Boolean = true
+    private var initialized: Boolean = false
 
     override fun isActive(): Boolean {
         return isActive;
@@ -48,9 +50,16 @@ open class JessicaUtil : Util {
         return true
     }
 
-    override fun Exec() {
+    override fun Init() {
+        NewJessica.LOGGER.info( "Init player" )
         mc = MinecraftClient.getInstance()
         player = mc.player!!
-        if ( mc.player == null ) return
+        this.initialized = true
+        NewJessica.LOGGER.info( "Got player" )
+    }
+
+    override fun Exec(): Boolean {
+        if ( !initialized ) return false;
+        return isActive && mc.player != null
     }
 }

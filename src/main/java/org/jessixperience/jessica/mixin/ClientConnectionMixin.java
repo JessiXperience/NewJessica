@@ -70,20 +70,27 @@ public class ClientConnectionMixin {
         String packetClass = packet.getClass().getName();
 
         if ( ignorePackets.contains( packetClass ) ) return;
-        NewJessica.INSTANCE.getLogger().info( packetClass );
+        if ( NewJessica.DEBUG_MODE ) NewJessica.INSTANCE.getLogger().info( packetClass );
 
         for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
-            if ( !packetClass.equals(tool.GetTriggerPacket()) ) continue;
+            if ( !packetClass.equals( tool.GetTriggerPacket() ) ) continue;
             tool.Exec();
         }
      }
 
-    @Inject( method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At( "HEAD" ))
+    @Inject( method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At( "TAIL" ))
     public void sendPackages( Packet<?> packet, CallbackInfo ci ) {
         String packetClass = packet.getClass().getName();
 
+        boolean initPacket = packetClass.equals("net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket");
+        if ( NewJessica.DEBUG_MODE && initPacket ) NewJessica.INSTANCE.getLogger().info( "Got init packet" );
+
+        for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
+            if ( initPacket ) tool.Init();
+        }
+
         if ( ignorePackets.contains( packetClass ) ) return;
-        NewJessica.INSTANCE.getLogger().info( packetClass );
+        if ( NewJessica.DEBUG_MODE ) NewJessica.INSTANCE.getLogger().info( packetClass );
     }
 
 }

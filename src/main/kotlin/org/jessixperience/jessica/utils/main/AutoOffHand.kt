@@ -1,7 +1,9 @@
 package org.jessixperience.jessica.utils.main
 
+import net.minecraft.client.MinecraftClient
 import net.minecraft.item.*
 import net.minecraft.util.Hand
+import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.JessicaUtil
 
 class AutoOffHand : JessicaUtil()
@@ -38,14 +40,17 @@ class AutoOffHand : JessicaUtil()
         player.setStackInHand( Hand.OFF_HAND, totemStack )
     }
 
-    override fun Exec() {
-        super.Exec()
-        if ( player.health > lowHealth ) return;
+    override fun Exec(): Boolean {
+        if ( !super.Exec() ) return false
+
+        if ( player.health > lowHealth ) return false
+        NewJessica.LOGGER.info( "AutoOffHand executed" )
         if ( player.health > crtHealth ) {
             this.onLowHP()
-            return
+            return true
         }
         this.onCriticalHP()
+        return true
     }
 
 }

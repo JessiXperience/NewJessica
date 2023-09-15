@@ -10,6 +10,7 @@ object NewJessica: ModInitializer
 {
     const val MOD_ID = "NewJessica"
     const val RELEASE = "0.0.2"
+    const val DEBUG_MODE = false
 
     val LOGGER: Logger = LoggerFactory.getLogger( MOD_ID )
     val utils: List<Util> = listOf(
