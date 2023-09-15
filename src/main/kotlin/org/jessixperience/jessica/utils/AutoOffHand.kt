@@ -3,8 +3,10 @@ package org.jessixperience.jessica.utils
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.item.*
+import net.minecraft.network.packet.s2c.play.InventoryS2CPacket
 import net.minecraft.text.Text
 import net.minecraft.util.Hand
+import org.jessixperience.jessica.NewJessica
 import org.jessixperience.jessica.utils.interfaces.Util
 
 class AutoOffHand : Util
@@ -26,6 +28,8 @@ class AutoOffHand : Util
     }
 
     fun onLowHP() {
+        NewJessica.LOGGER.info( "Low HP" )
+
         val mc = MinecraftClient.getInstance()
 
         val activeItem: ItemStack = mc.player!!.mainHandStack
@@ -44,6 +48,8 @@ class AutoOffHand : Util
     }
 
     private fun onSword( player: ClientPlayerEntity ) {
+        NewJessica.LOGGER.info( "Sword detected" )
+
         var appleIndex = getFromInventory( Items.ENCHANTED_GOLDEN_APPLE )
         if ( appleIndex == -1 ) appleIndex = getFromInventory( Items.GOLDEN_APPLE )
         if ( appleIndex == -1 ) return
@@ -54,6 +60,8 @@ class AutoOffHand : Util
     }
 
     private fun onPickaxe( player: ClientPlayerEntity ) {
+        NewJessica.LOGGER.info( "Pickaxe detected" )
+
         val chorusIndex = getFromInventory( Items.POPPED_CHORUS_FRUIT )
         if ( chorusIndex == -1 ) return
         println( "Chorus found: $chorusIndex" )
@@ -63,6 +71,8 @@ class AutoOffHand : Util
     }
 
     fun onCriticalHP() {
+        NewJessica.LOGGER.info( "Critical HP" )
+
         val player = MinecraftClient.getInstance().player!!
         val totemIndex = getFromInventory( Items.TOTEM_OF_UNDYING )
         if ( totemIndex == -1 ) return
@@ -78,6 +88,7 @@ class AutoOffHand : Util
 
     override fun exec() {
         if ( MinecraftClient.getInstance().player == null ) return
+        NewJessica.LOGGER.info( "Damage taken" )
         val playerHealth: Float = MinecraftClient.getInstance().player!!.health
 
         if ( playerHealth > lowHealth ) return;
