@@ -45,9 +45,9 @@ public class PressableWidgetMixin extends ClickableWidget
                 0,
                 getTextureY()
         );
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
-        int i = this.active ? 16777215 : 10526880;
-        this.drawScrollableText(matrices, minecraftClient.textRenderer, 2, i | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        int i = this.active ? 0xFFFFFF : 0xA0A0A0;
+        this.drawScrollableText(matrices, minecraftClient.textRenderer, 2, i | MathHelper.ceil( 255.0f) << 24 );
         ci.cancel();
     }
 

@@ -79,7 +79,7 @@ public class TitleScreenMixin extends Screen
     public void render( MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci ) {
         RenderSystem.setShaderTexture( 0, BACKGROUND );
         RenderSystem.enableBlend();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.2F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         drawTexture(matrices, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
 
         float g = 1.0F;
@@ -92,7 +92,7 @@ public class TitleScreenMixin extends Screen
             while (var9.hasNext()) {
                 Element element = (Element) var9.next();
                 if (element instanceof ClickableWidget) {
-                    ((ClickableWidget) element).setAlpha(1F);
+                    ((ClickableWidget) element).setAlpha(0.1F);
                 }
             }
         }
