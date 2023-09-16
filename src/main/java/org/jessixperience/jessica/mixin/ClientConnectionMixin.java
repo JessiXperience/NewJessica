@@ -80,15 +80,13 @@ public class ClientConnectionMixin
     public void sendPackages( Packet<?> packet, CallbackInfo ci ) {
         String packetClass = packet.getClass().getName();
 
-        boolean initPacket = packetClass.equals("net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket");
+        boolean initPacket = packetClass.equals( "net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket" );
         if ( NewJessica.DEBUG_MODE && initPacket ) NewJessica.INSTANCE.getLogger().info( "Got init packet" );
-
         if ( ignorePackets.contains( packetClass ) ) return;
         if ( NewJessica.DEBUG_MODE ) NewJessica.INSTANCE.getLogger().info( packetClass );
 
-        for ( Util tool : NewJessica.INSTANCE.getUtils() ) {
-            if ( initPacket ) tool.init();
-        }
+        if ( !initPacket ) return;
+        for ( Util tool : NewJessica.INSTANCE.getUtils() ) tool.init();
     }
 
 }

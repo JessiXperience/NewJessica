@@ -30,10 +30,25 @@ public class PressableWidgetMixin extends ClickableWidget
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
-        drawNineSlicedTexture(matrices, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 200, 20, 0, this.getTextureY());
+
+        drawNineSlicedTexture(
+                matrices,
+                this.getX(),
+                this.getY(),
+                this.getWidth(),
+                this.getHeight(),
+                60,
+                4,
+
+                200,
+                20,
+                0,
+                getTextureY()
+        );
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
         int i = this.active ? 16777215 : 10526880;
         this.drawScrollableText(matrices, minecraftClient.textRenderer, 2, i | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        ci.cancel();
     }
 
     @Override
@@ -43,13 +58,7 @@ public class PressableWidgetMixin extends ClickableWidget
     protected void appendClickableNarrations(NarrationMessageBuilder builder) {}
 
     private int getTextureY() {
-        int i = 1;
-        if (!this.active) {
-            i = 0;
-        } else if (this.isSelected()) {
-            i = 2;
-        }
-
-        return 46 + i * 20;
+        int i = this.isSelected() ? 1 : 0;
+        return i * 20;
     }
 }

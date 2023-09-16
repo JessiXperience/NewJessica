@@ -55,9 +55,11 @@ public class TitleScreenMixin extends Screen
 
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("menu.singleplayer"), (button) -> {
             this.client.setScreen(new SelectWorldScreen(this));
-        }).dimensions(this.width / 2 - 100, y, 200, 20).build());
+        }).dimensions(this.width / 2 - 100, y, 200, 20).build()).active = true;
+
         Tooltip tooltip = Tooltip.of( Text.empty() );
         boolean bl = true;
+
         ((ButtonWidget)this.addDrawableChild(ButtonWidget.builder(Text.translatable("menu.multiplayer"), (button) -> {
             Screen screen = this.client.options.skipMultiplayerWarning ? new MultiplayerScreen(this) : new MultiplayerWarningScreen(this);
             this.client.setScreen((Screen)screen);

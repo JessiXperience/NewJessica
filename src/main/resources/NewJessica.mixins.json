@@ -8,7 +8,12 @@
   ],
   "client": [
     "ClickableWidgetMixin",
+    "DrawableHelperMixin",
+    "EntryListWidgetMixin",
     "PressableWidgetMixin",
+    "ScreenMixin",
+    "SelectWorldScreenMixin",
+    "SliderWidgetMixin",
     "StyleMixin",
     "TitleScreenMixin",
     "WindowMixin"

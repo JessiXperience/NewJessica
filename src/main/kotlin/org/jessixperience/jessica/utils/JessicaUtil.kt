@@ -28,7 +28,7 @@ open class JessicaUtil : Util
         return TRIGGER
     }
 
-    private fun getFromInventory(searchedItem: Item): Int {
+    private fun getFromInventory( searchedItem: Item ): Int {
         for ( itemIndex in 0 until player.inventory.size() ) {
             val currentStack = player.inventory.getStack(itemIndex).item
             if ( currentStack != searchedItem ) continue
@@ -37,7 +37,7 @@ open class JessicaUtil : Util
         return -1
     }
 
-    protected fun secondaryArmEquip( item: Item): Boolean {
+    protected fun secondaryArmEquip( item: Item ): Boolean {
         val itemIndex = getFromInventory( item )
         if ( itemIndex == -1 ) return false
 
