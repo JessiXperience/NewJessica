@@ -5,7 +5,7 @@
 </p>
 
 [Matrix]() |
-[Telegram](https://t.me/NewJessica) |
+[Telegram](https://t.me/JessiXperience) |
 </div>
 
 🧑‍💻 Our JessiXperience team represents developers from around the world, including Spain, Georgia, the Czech Republic, and others.
