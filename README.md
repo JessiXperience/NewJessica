@@ -42,12 +42,14 @@
 - **Скачать лаунчер для Windows:** [https://llaun.ch/installer](https://llaun.ch/installer)
 
 "versions": "C:/Users/{user}/AppData/Roaming/.tlauncher/legacy/Minecraft/game/versions/",
-"libraries": "C:/Users/{user}/AppData/Roaming/.tlauncher/legacy/Minecraft/game/libraries",
+
+"libraries": "C:/Users/{user}/AppData/Roaming/.tlauncher/legacy/Minecraft/game/libraries"
 
 **Linux:**
 - **Скачать лаунчер для MacOS/Linux:** [https://llaun.ch/jar](https://llaun.ch/jar)
 
 "versions": "/home/{user}/.minecraft/versions",
+
 "libraries": "/home/{user}/.minecraft/libraries"
 
 После запускаете Legacy Launcher, чит будет называться NewJessica 5.0.2, находится выше 1.12.2.
