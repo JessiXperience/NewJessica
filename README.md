@@ -4,8 +4,13 @@
     <img width="200" src="https://github.com/JessiXperience/NewJessica/blob/alpha/NewJessica_logo.png">
 </p>
 
-[Matrix]() |
+[Matrix](#) |
 [Telegram](https://t.me/JessiXperience) |
+[Github](https://github.com/JessiXperience) |
+[Owner](https://t.me/Sompetch) |
+[Youtube](#) |
+[Mastodon](https://mastodon.ml/@Sompetch) |
+[Email](mailto:JessiXperience@riseup.net)
 </div>
 
 🧑‍💻 Наша команда JessiXperience объединяет разработчиков со всего мира, включая Испанию, Грузию, Чешскую Республику и другие страны.
